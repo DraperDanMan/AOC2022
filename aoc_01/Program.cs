@@ -8,15 +8,12 @@ internal class Program
 {
     public static void Part1(string filepath)
     {
-        int elfNumber = 0;
         int elfCalories = 0;
-        int totalCalories = 0;
         
         using (var file = new FileStream(filepath, FileMode.Open, FileAccess.Read))
         {
             using (var reader = new StreamReader(file))
             {
-                int num = 1;
                 int calories = 0;
                 
                 string line = reader.ReadLine();
@@ -27,12 +24,9 @@ internal class Program
                         if (calories > elfCalories)
                         {
                             elfCalories = calories;
-                            elfNumber = num;
                         }
 
-                        totalCalories += calories;
                         calories = 0;
-                        num++;
                     }
                     else if (int.TryParse(line, out var cal))
                     {
@@ -43,7 +37,7 @@ internal class Program
             }
         }
         
-        Console.Out.WriteLine($"Total Calories is:{totalCalories}, elf {elfNumber} is carrying the most with: {elfCalories}");
+        Console.Out.WriteLine($"elf carrying the most with: {elfCalories}");
     }
     
     public static void Part2(string filepath)
